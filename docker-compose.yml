@@ -1,0 +1,66 @@
+services:
+# Spark Master
+  spark-master:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bd-spark-master
+    hostname: spark-master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+    ports:
+      - "8080:8080"  # Spark Master UI
+      - "7077:7077"  # Spark Master service(where the master and workers connect to each other)
+    environment:
+      - SPARK_NO_DAEMONIZE=true
+# Bind Mount
+# creates a live, real-time bridge between a folder on your computer and a folder inside the container.
+    volumes:
+      - ./spark-apps:/opt/spark-apps
+      - ./spark-data:/opt/spark-data
+    networks:
+      - spark-network
+
+# Spark Worker 1
+  spark-worker-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bd-spark-worker-1
+    hostname: spark-worker-1
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    depends_on:
+      - spark-master
+    environment:
+# On these: SPARK_WORKER_CORES=1, SPARK_WORKER_MEMORY=1G, you can specify highier number of Gs and Cores like 2 or more.
+      - SPARK_WORKER_CORES=1  
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_NO_DAEMONIZE=true
+    volumes:
+      - ./spark-apps:/opt/spark-apps
+      - ./spark-data:/opt/spark-data
+    networks:
+      - spark-network
+
+# Spark Worker 2
+  spark-worker-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bd-spark-worker-2
+    hostname: spark-worker-2
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    depends_on:
+      - spark-master
+    environment:
+      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_NO_DAEMONIZE=true
+    volumes:
+      - ./spark-apps:/opt/spark-apps
+      - ./spark-data:/opt/spark-data
+    networks:
+      - spark-network
+
+networks:
+  spark-network:
+    driver: bridge
