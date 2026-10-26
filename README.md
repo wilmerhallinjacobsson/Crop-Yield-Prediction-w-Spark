@@ -1,3 +1,72 @@
-# Crop-Yield-Prediction-w-Spark
+# Crop Yield Prediction with Apache Spark
 
-Part of the course Big Data Analytics on Cloud Computing Infrastructures, fall semester 2026 @ Malmö University.
+A collaborative university project for **Big Data Analytics on Cloud Computing Infrastructures**, leveraging containerized Apache Spark via Docker for distributed data processing and machine learning.
+
+---
+
+## Project Directory Structure
+
+```text
+Crop-Yield-Prediction-w-Spark/
+│
+├── spark-apps/             # PySpark scripts/jobs (bind-mounted to container)
+├── spark-data/             # Datasets
+├── Dockerfile              # Custom Spark image configuration (Apache Spark 3.5.0)
+├── docker-compose.yml      # Spark Master and Worker node definitions
+├── spark_cluster_init.sh   # Automated startup script for the cluster
+├── submit_job.sh           # Automated script to submit Spark jobs to the master node
+└── README.md
+
+```
+
+---
+
+## Prerequisites
+
+1. **Docker Desktop** (Make sure it is open and running before executing scripts).
+
+2. (For Windows) **Git Bash / Ubuntu (WSL)**
+3. (macOS/Linux) **native Unix terminal**
+
+---
+
+## Getting Started
+
+### 1. Start the Spark Cluster
+
+To build the containers and boot up the Spark Master and Worker nodes in the background, run:
+
+```bash
+bash spark_cluster_init.sh
+
+```
+
+### 2. Access the Spark Web UI
+
+Monitor master node and active workers through the browser:
+
+* **URL:** [http://localhost:8080](http://localhost:8080)
+
+---
+
+## Developing & Submitting Spark Jobs
+
+1. **Add your code:** Place any PySpark scripts inside the `spark-apps/` folder (e.g., `test_job.py`). Because of Docker volume mounting, any file saved here is instantly available inside the container.
+2. **Add your data:** Store the CSV or dataset files inside the `spark-data/` folder.
+3. **Submit the job:** Run your submission script in your terminal to execute the job on the Spark cluster:
+```bash
+bash submit_job.sh
+
+```
+
+
+---
+
+## Stopping the Cluster
+
+When you are done, run:
+
+```bash
+docker-compose down
+
+```
