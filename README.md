@@ -37,7 +37,7 @@ Crop-Yield-Prediction-w-Spark/
 To build the containers and boot up the Spark Master and Worker nodes in the background, run:
 
 ```bash
-bash spark_cluster_init.sh
+bash init_spark_cluster.sh
 
 ```
 
