@@ -1,3 +1,5 @@
+# 1. Cluster Setup: 1 master node and 2 worker nodes
+
 services:
 # Spark Master
   spark-master:
@@ -35,11 +37,17 @@ services:
       - SPARK_WORKER_CORES=1  
       - SPARK_WORKER_MEMORY=1G
       - SPARK_NO_DAEMONIZE=true
+      - SPARK_MASTER=spark://spark-master:7077
     volumes:
       - ./spark-apps:/opt/spark-apps
       - ./spark-data:/opt/spark-data
     networks:
-      - spark-network
+      - spark-network      
+    deploy:
+      resources:
+        limits:
+          cpus: '${SPARK_WORKER_CPUS:-1.5}'       # Defaults to 1.5 CPUs if not set
+          memory: '${SPARK_WORKER_MEMORY:-2G}'     # Defaults to 2G if not set
 
 # Spark Worker 2
   spark-worker-2:
@@ -55,11 +63,18 @@ services:
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_MEMORY=1G
       - SPARK_NO_DAEMONIZE=true
+      - SPARK_MASTER=spark://spark-master:7077
     volumes:
       - ./spark-apps:/opt/spark-apps
       - ./spark-data:/opt/spark-data
     networks:
       - spark-network
+    deploy:
+      resources:
+        limits:
+          cpus: '${SPARK_WORKER_CPUS:-1.5}'       # Defaults to 1.5 CPUs if not set
+          memory: '${SPARK_WORKER_MEMORY:-2G}'     # Defaults to 2G if not set
+
 
 networks:
   spark-network:
