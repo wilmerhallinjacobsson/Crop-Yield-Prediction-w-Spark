@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 # TO RUN IT:
 #   bash init_spark_cluster.sh
 

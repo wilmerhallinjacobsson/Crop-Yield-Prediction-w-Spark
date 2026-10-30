@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # TO RUN IT:
 #   bash submit_job.sh
