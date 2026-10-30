@@ -87,7 +87,7 @@ Crop-Yield-Prediction-w-Spark/
 │   ├── worker1/            # Chunk 1
 │   └── worker2/            # Chunk 2
 |
-|── data_setup.py       # Script to download and partition Kaggle datasets
+|── data_setup.py           # Script to download and partition Kaggle datasets
 ├── docker-compose.yml      # Spark Master and Worker node definitions
 ├── Dockerfile              # Custom Spark image configuration (Apache Spark 3.5.0)
 ├── requirements.txt        # Python dependencies 
