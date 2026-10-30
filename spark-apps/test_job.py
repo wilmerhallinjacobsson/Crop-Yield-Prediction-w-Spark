@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 
 # Initialize Spark
 spark = SparkSession.builder \
-    .appName("MyFirstSparkApp") \
+    .appName("Test_job") \
     .getOrCreate()
 
 # Reducing log noise
