@@ -4,23 +4,6 @@ A collaborative university project for **Big Data Analytics on Cloud Computing I
 
 ---
 
-## Project Directory Structure
-
-```text
-Crop-Yield-Prediction-w-Spark/
-│
-├── spark-apps/             # PySpark scripts/jobs (bind-mounted to container)
-├── spark-data/             # Datasets
-├── Dockerfile              # Custom Spark image configuration (Apache Spark 3.5.0)
-├── docker-compose.yml      # Spark Master and Worker node definitions
-├── spark_cluster_init.sh   # Automated startup script for the cluster
-├── submit_job.sh           # Automated script to submit Spark jobs to the master node
-└── README.md
-
-```
-
----
-
 ## Prerequisites
 
 1. **Docker Desktop** (Make sure it is open and running before executing scripts).
@@ -53,6 +36,7 @@ This automatically downloads the source file and partitions it into spark-data/m
     python setup_data.py
     
 ```
+---
 
 ## Spark Cluster Setup
 
@@ -94,3 +78,24 @@ When you are done, run:
 docker-compose down
 
 ```
+---
+
+## Project Directory Structure
+
+```text
+Crop-Yield-Prediction-w-Spark/
+│
+├── spark-apps/             # PySpark scripts/jobs (bind-mounted to container)
+├── spark-data/             # Partitioned datasets (bind-mounted and ignored by Git)
+│   ├── master/             # Chunk 0
+│   ├── worker1/            # Chunk 1
+│   └── worker2/            # Chunk 2
+├── setup_data/
+|   |── data_setup.py       # Script to download and partition Kaggle datasets
+│
+├── Dockerfile              # Custom Spark image configuration (Apache Spark 3.5.0)
+├── docker-compose.yml      # Spark Master and Worker node definitions
+├── requirements.txt        # Python dependencies 
+├── spark_cluster_init.sh   # Automated startup script for the cluster
+├── submit_job.sh           # Automated script to submit Spark jobs to the master node
+└── README.md
