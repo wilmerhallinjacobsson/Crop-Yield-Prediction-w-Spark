@@ -28,7 +28,7 @@ A collaborative university project for **Big Data Analytics on Cloud Computing I
 #### 2. Run the Download Script
 This automatically downloads the source file and partitions it into spark-data/master/ and spark-data/workerX/.
 ```bash
-    pip install -r requirements.txt
+    pip install -r data-setup-requirements.txt
     python data_setup.py
     
 ```
@@ -59,7 +59,7 @@ Monitor master node and active workers through the browser:
 2. **Add your data:** Store the CSV or dataset files inside the `spark-data/` folder.
 3. **Submit the job:** Run your submission script in your terminal to execute the job on the Spark cluster:
 ```bash
-bash submit_job.sh
+bash submit_job.sh "JOB_NAME".py
 
 ```
 
