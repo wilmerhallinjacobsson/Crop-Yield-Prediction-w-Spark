@@ -29,7 +29,7 @@ A collaborative university project for **Big Data Analytics on Cloud Computing I
 This automatically downloads the source file and partitions it into spark-data/master/ and spark-data/workerX/.
 ```bash
     pip install -r requirements.txt
-    python setup_data/data_setup.py
+    python data_setup.py
     
 ```
 ---
@@ -41,7 +41,7 @@ This automatically downloads the source file and partitions it into spark-data/m
 To build the containers and boot up the Spark Master and Worker nodes in the background, run:
 
 ```bash
-bash init_spark_cluster.sh
+bash spark_cluster_init.sh
 
 ```
 
@@ -86,11 +86,10 @@ Crop-Yield-Prediction-w-Spark/
 │   ├── master/             # Chunk 0
 │   ├── worker1/            # Chunk 1
 │   └── worker2/            # Chunk 2
-├── setup_data/
-|   |── data_setup.py       # Script to download and partition Kaggle datasets
-│
-├── Dockerfile              # Custom Spark image configuration (Apache Spark 3.5.0)
+|
+|── data_setup.py       # Script to download and partition Kaggle datasets
 ├── docker-compose.yml      # Spark Master and Worker node definitions
+├── Dockerfile              # Custom Spark image configuration (Apache Spark 3.5.0)
 ├── requirements.txt        # Python dependencies 
 ├── spark_cluster_init.sh   # Automated startup script for the cluster
 ├── submit_job.sh           # Automated script to submit Spark jobs to the master node
