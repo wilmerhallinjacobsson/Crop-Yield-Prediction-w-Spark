@@ -15,7 +15,7 @@ A collaborative university project for **Big Data Analytics on Cloud Computing I
 
 ### Dataset Setup
 
-The raw data is not tracked in Git.
+**The raw data is not tracked in Git.**
 
 #### 1. Kaggle Credentials (One-time setup)
 1. Go to [kaggle.com/settings](https://www.kaggle.com/settings).
