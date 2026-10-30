@@ -29,7 +29,7 @@ A collaborative university project for **Big Data Analytics on Cloud Computing I
 This automatically downloads the source file and partitions it into spark-data/master/ and spark-data/workerX/.
 ```bash
     pip install -r requirements.txt
-    python setup_data.py
+    python python setup_data/data_setup.py
     
 ```
 ---
