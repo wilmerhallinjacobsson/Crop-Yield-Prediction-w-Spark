@@ -19,7 +19,7 @@ services:
 # creates a live, real-time bridge between a folder on your computer and a folder inside the container.
     volumes:
       - ./spark-apps:/opt/spark-apps
-      - ./spark-data/master:/opt/spark-data # Only sees master folder
+      - ./spark-data/master:/opt/spark/data # Only sees master folder
     networks:
       - spark-network
 
@@ -42,7 +42,7 @@ services:
       - SPARK_MASTER=spark://spark-master:7077
     volumes:
       - ./spark-apps:/opt/spark-apps
-      - ./spark-data/worker1:/opt/spark-data # Only sees worker1 folder
+      - ./spark-data/worker1:/opt/spark/data # Only sees worker1 folder
     networks:
       - spark-network      
     deploy:
@@ -69,7 +69,7 @@ services:
       - SPARK_MASTER=spark://spark-master:7077
     volumes:
       - ./spark-apps:/opt/spark-apps
-      - ./spark-data/worker2:/opt/spark-data # Only sees worker2 folder
+      - ./spark-data/worker2:/opt/spark/data # Only sees worker2 folder
     networks:
       - spark-network
     deploy:
