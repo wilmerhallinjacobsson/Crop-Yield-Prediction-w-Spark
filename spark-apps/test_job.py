@@ -1,13 +1,21 @@
+# Import SparkSession
 from pyspark.sql import SparkSession
 
-spark = SparkSession.builder.appName("TestJob").getOrCreate()
+# Create SparkSession
+spark = SparkSession.builder.appName("DataLoading").getOrCreate()
 
 # Reducing log noise
 spark.sparkContext.setLogLevel("WARN")   
 
-data = [("Alice", 25), ("Bob", 30), ("Charlie", 35)]
-df = spark.createDataFrame(data, ["Name", "Age"])
 
-df.show()
+# Read Data
+data = spark.read.format("csv").option("header", "true").load("data.csv")
 
+# Cache the data in memory
+data.cache()
+
+# Count the number of records
+print("Number of records: ", data.count())
+
+# Stop SparkSession
 spark.stop()
