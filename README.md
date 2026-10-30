@@ -11,8 +11,6 @@ A collaborative university project for **Big Data Analytics on Cloud Computing I
 2. (For Windows) **Git Bash / Ubuntu (WSL)**
 3. (macOS/Linux) **native Unix terminal**
 
----
-
 ## Getting Started
 
 ### Dataset Setup
