@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 # TO RUN IT:
-#   bash init_spark_cluster.sh
+#   bash spark_cluster_init.sh
 
 # -- 1.2 CLUSTER RESOURCE ALLOCATION ---
 export SPARK_WORKER_CPUS="1.5"
