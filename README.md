@@ -15,11 +15,11 @@ A collaborative university project for **Big Data Analytics on Cloud Computing I
 
 ## Getting Started
 
-## Dataset Setup
+### Dataset Setup
 
 The raw data is not tracked in Git.
 
-### 1. Kaggle Credentials (One-time setup)
+#### 1. Kaggle Credentials (One-time setup)
 1. Go to [kaggle.com/settings](https://www.kaggle.com/settings).
 2. Under the **API** section, click **Create New Token** (or copy your Access Token).
 3. On Linux/WSL, place the token in:
@@ -29,7 +29,7 @@ The raw data is not tracked in Git.
    chmod 600 ~/.kaggle/access_token
 ```
 
-### 2. Run the Download Script
+#### 2. Run the Download Script
 This automatically downloads the source file and partitions it into spark-data/master/ and spark-data/workerX/.
 ```bash
     pip install -r requirements.txt
