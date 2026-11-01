@@ -25,12 +25,18 @@ A collaborative university project for **Big Data Analytics on Cloud Computing I
    chmod 600 ~/.kaggle/access_token
 ```
 
-#### 2. Run the Download Script
-This automatically downloads the source file and partitions it into spark-data/master/ and spark-data/workerX/.
+### 2. Create a virtual env and install required packages
 ```bash
-    pip install -r data-setup-requirements.txt
+   python -m venv .venv
+   source .venv/bin/activate
+   pip install -r data-setup-requirements.txt
+```
+
+
+#### 3. Run the Data Setup Script
+This automatically downloads the source file and partitions into spark-data/master/ and spark-data/workerX/.
+```bash
     python data_setup.py
-    
 ```
 ---
 
@@ -55,9 +61,8 @@ Monitor master node and active workers through the browser:
 
 ## Developing & Submitting Spark Jobs
 
-1. **Add your code:** Place any PySpark scripts inside the `spark-apps/` folder (e.g., `test_job.py`). Because of Docker volume mounting, any file saved here is instantly available inside the container.
-2. **Add your data:** Store the CSV or dataset files inside the `spark-data/` folder.
-3. **Submit the job:** Run your submission script in your terminal to execute the job on the Spark cluster:
+1. **Add your code:** Place any PySpark scripts inside the `spark-apps/` folder (e.g., `test_job.py`). (Because of Docker volume mounting, any file saved here is instantly available inside the container.)
+2. **Submit the job:** Run your submission script in your terminal to execute the job on the Spark cluster:
 ```bash
 bash submit_job.sh "JOB_NAME".py
 
