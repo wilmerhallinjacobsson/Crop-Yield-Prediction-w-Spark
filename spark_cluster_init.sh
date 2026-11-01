@@ -19,4 +19,4 @@ docker-compose build
 echo "Starting Spark cluster..."
 docker-compose up -d
 
-echo "Done! Spark is running."
+echo "Done! Spark cluster is running."
