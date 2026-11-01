@@ -1,9 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 
-# ----------------------------
-# 3. Data Loading on Each Node
-#-----------------------------
 
 def create_spark_session():
     """Create a Spark session for our ETL job"""
