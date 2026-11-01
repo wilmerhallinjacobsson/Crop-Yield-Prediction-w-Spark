@@ -25,7 +25,7 @@ A collaborative university project for **Big Data Analytics on Cloud Computing I
    chmod 600 ~/.kaggle/access_token
 ```
 
-### 2. Create a virtual env and install required packages
+#### 2. Create a virtual env and install required packages
 ```bash
    python -m venv .venv
    source .venv/bin/activate
