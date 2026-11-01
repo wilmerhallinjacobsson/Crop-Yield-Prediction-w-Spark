@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 
+# inspired from https://www.dataquest.io/blog/build-your-first-etl-pipeline-with-pyspark/
 
 def create_spark_session():
     """Create a Spark session for our ETL job"""

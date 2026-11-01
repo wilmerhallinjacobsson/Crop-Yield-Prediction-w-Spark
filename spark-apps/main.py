@@ -2,7 +2,9 @@ from pyspark.sql import SparkSession
 from datetime import datetime
 import os
 
-# TO RUN PIPELINE: bash submit_job.sh main.py
+# TO RUN PIPELINA: bash submit_job.sh main.py
+
+# inspired from https://www.dataquest.io/blog/build-your-first-etl-pipeline-with-pyspark/
 
 # Import our ETL functions
 from etl_pipeline import *
