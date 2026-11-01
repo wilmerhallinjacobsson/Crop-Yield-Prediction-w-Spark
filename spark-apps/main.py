@@ -1,9 +1,8 @@
 from pyspark.sql import SparkSession
-import logging
-import sys
-import traceback
 from datetime import datetime
 import os
+
+# TO RUN PIPELINE: bash submit_job.sh main.py
 
 # Import our ETL functions
 from etl_pipeline import *

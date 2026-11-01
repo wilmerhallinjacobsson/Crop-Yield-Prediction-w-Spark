@@ -2,7 +2,7 @@
 set -e
 
 # TO RUN IT:
-#   bash submit_job.sh -{JOB_FILE}.py
+#   bash submit_job.sh "JOB_NAME".py
 
 
 echo "Submitting job to spark cluster..."
