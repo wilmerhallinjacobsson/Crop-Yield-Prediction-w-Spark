@@ -12,9 +12,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SPARK_DATA_DIR = os.path.join(BASE_DIR, "spark-data")
 
 
-# --- Downloads csv file from kaggle dataset
-
 def dowload_data(url = "patelris/crop-yield-prediction-dataset", filename = "yield_df.csv"):
+    """ Downloads csv file from kaggle dataset """
+
     print(f"Downloading {filename} from {url} in Kaggle")
     try:
         return kagglehub.dataset_download(url, path=filename)
@@ -24,9 +24,9 @@ def dowload_data(url = "patelris/crop-yield-prediction-dataset", filename = "yie
         return
     
 
-# --- Split the file into N equal parts
-
 def split_csv_into_n_parts(original_file_name, n_parts=3, base_dir='spark-data', filename='data', has_index=True, verbose=True):
+    """ Splits the file into N equal parts """
+    
     # Count total data rows (subtract 1 for the header)
     with open(original_file_name, 'rb') as f:
         total_rows = sum(1 for _ in f) - 1

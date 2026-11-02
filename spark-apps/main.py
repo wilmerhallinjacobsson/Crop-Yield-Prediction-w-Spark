@@ -1,13 +1,12 @@
 from pyspark.sql import SparkSession
 from datetime import datetime
-import os
 
 # TO RUN PIPELINA: bash submit_job.sh main.py
 
 # inspired from https://www.dataquest.io/blog/build-your-first-etl-pipeline-with-pyspark/
 
 # Import our ETL functions
-from etl_pipeline import *
+import etl_pipeline
 
 def main():
     """Main ETL pipeline"""
@@ -16,11 +15,11 @@ def main():
     # start_time = datetime.now()
 
     # Initialize Spark
-    spark = create_spark_session()
+    spark = etl_pipeline.create_spark_session()
     print("Spark session created")
 
     # Extract
-    raw_df = extract_all_data(spark)
+    raw_df = etl_pipeline.extract_all_data(spark)
     print(f"Extracted {raw_df.count()} raw records")
 
 
