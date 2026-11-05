@@ -1,5 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
+from pyspark.sql.functions import col
 
 # inspired from https://www.dataquest.io/blog/build-your-first-etl-pipeline-with-pyspark/
 
@@ -61,3 +62,16 @@ def extract_all_data(spark):
     return unified_df
 
 
+def repartition(spark, raw_df):
+    repart_df = raw_df.repartition(2)
+    
+    return repart_df
+
+
+def preprocessing(spark, df):
+    df.createOrReplaceTempView("temp_view")
+    # Remove duplicate rows
+    new_df = spark.sql("SELECT Area, Item, Year, 'hg/ha_yield', average_rain_fall_mm_per_year, pesticides_tonnes, AVG(avg_temp) " +
+                       "FROM temp_view GROUP BY Area, Item, Year, 'hg/ha_yield', average_rain_fall_mm_per_year, pesticides_tonnes")
+    
+    return new_df

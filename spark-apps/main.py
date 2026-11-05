@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession
 from datetime import datetime
 
-# TO RUN PIPELINA: bash submit_job.sh main.py
+# TO RUN PIPELINE: bash submit_job.sh main.py
 
 # inspired from https://www.dataquest.io/blog/build-your-first-etl-pipeline-with-pyspark/
 
@@ -22,6 +22,11 @@ def main():
     raw_df = etl_pipeline.extract_all_data(spark)
     print(f"Extracted {raw_df.count()} raw records")
 
+    pre_df = etl_pipeline.preprocessing(spark, raw_df)
+    print(f"Filtered to {pre_df.count()} during pre-processing")
+
+    part_df = etl_pipeline.repartition(spark, pre_df)
+    print(f"Extracted {part_df.count()} partitioned records")
 
     # Close Spark Session
     spark.stop()
