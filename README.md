@@ -1,6 +1,8 @@
 # Crop Yield Prediction with Apache Spark
 
-A collaborative university project for **Big Data Analytics on Cloud Computing Infrastructures**, leveraging containerized Apache Spark via Docker for distributed data processing and machine learning.
+A collaborative university project for **Big Data Analytics on Cloud Computing Infrastructures**, leveraging containerized Apache Spark via Docker for distributed data processing and machine learning. 
+
+Crop Yield dataset is from [Kaggle](https://www.kaggle.com/datasets/patelris/crop-yield-prediction-dataset/data).
 
 ---
 
