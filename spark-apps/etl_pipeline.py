@@ -60,15 +60,26 @@ def extract_all_data(spark):
     return unified_df
 
 
-def repartition_data(spark, raw_df):
-    """Repartitions the raw dataframe for paralell processing between the two workers"""
+# Addressing the SQL side of repartioning.
+def repartition(spark, raw_df):
+    raw_df.createOrReplaceTempView("raw_yield")
+    repart_df = spark.sql("SELECT /*+ REPARTITION(2) */ * FROM raw_yield")
+    print(f"Repartitioned dataset has {repart_df.rdd.getNumPartitions()} partitions")
+    return repart_df
+
+# Simpler preprocessing for now, it removes duplicates and returns a new dataframe with distinct rows.
+def preprocessing(spark, df):
+    df.createOrReplaceTempView("temp_view")
+    return spark.sql("SELECT DISTINCT * FROM temp_view")
+
+
+# Wilmers method for preprocessing.
+'''
+def preprocessing(spark, df):
+    df.createOrReplaceTempView("temp_view")
+    # Remove duplicate rows
+    new_df = spark.sql("SELECT Area, Item, Year, 'hg/ha_yield', average_rain_fall_mm_per_year, pesticides_tonnes, AVG(avg_temp) " +
+                       "FROM temp_view GROUP BY Area, Item, Year, 'hg/ha_yield', average_rain_fall_mm_per_year, pesticides_tonnes")
     
-    # Repartition the dataframe into 3 partitions (1 for master, 2 for workers)
-    repartitioned_df = raw_df.repartition(3)
-
-    print(f"Repartitioned dataset has {repartitioned_df.rdd.getNumPartitions()} partitions")
-
-    return repartitioned_df
-
-def clean_transform_data(spark, raw_df):
-    
+    return new_df
+'''
