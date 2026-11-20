@@ -22,7 +22,7 @@ def extract_yield_data(spark, input_path):
     print(f"Reading crop yield data from {input_path}")
 
     # Data schema
-        # Columns: Area, Item, Year, hg/ha_yield, average_rain_fall_mm_per_year, pesticides_tonnes, avg_temp
+    # Columns: Area, Item, Year, hg/ha_yield, average_rain_fall_mm_per_year, pesticides_tonnes, avg_temp
     expected_schema = StructType([
             StructField('Area', StringType(), True),
             StructField('Item', StringType(), True),
@@ -31,7 +31,6 @@ def extract_yield_data(spark, input_path):
             StructField('average_rain_fall_mm_per_year', FloatType() , True),
             StructField('pesticides_tonnes', FloatType(), True),
             StructField('avg_temp', FloatType() , True)
-    
             ])
     
     df = spark.read.csv(
@@ -54,10 +53,22 @@ def extract_all_data(spark):
     df3 = extract_yield_data(spark, "/opt/spark-data/worker2/data_2.csv")
 
     # Unify all the df
-    unified_df = df1.union(df2).union(df3)
+    unified_df = df1.union(df2).union(df3) # New RDD
 
     print(f"Unified dataset has {unified_df.count()} rows")
   
     return unified_df
 
 
+def repartition_data(spark, raw_df):
+    """Repartitions the raw dataframe for paralell processing between the two workers"""
+    
+    # Repartition the dataframe into 3 partitions (1 for master, 2 for workers)
+    repartitioned_df = raw_df.repartition(3)
+
+    print(f"Repartitioned dataset has {repartitioned_df.rdd.getNumPartitions()} partitions")
+
+    return repartitioned_df
+
+def clean_transform_data(spark, raw_df):
+    
